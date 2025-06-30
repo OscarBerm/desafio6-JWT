@@ -12,7 +12,7 @@ const loginUser = async (req, res) => {
         }
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
         if (!isPasswordCorrect) {
-            return res.status(401).json({ message: 'Invalid password' })
+            return res.status(401).json({ message: 'User not authorized' })
         }
         const token = jwt.sign({ email }, process.env.JWT_SECRET, {
             expiresIn: '120s'
